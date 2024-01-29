@@ -28,7 +28,7 @@ export default function PurchaseArea() {
     const onSendBtn = ()=>{
         let value = selectedAssetValue.value==='premium'?dateValue:inputValue
         if(walletAddress&&selectedAssetValue.value&&value){
-            axios.post("http://65.21.85.17:8553/api/v1/user/update",{
+            axios.post("https://api.cryptoshowdown.io/api/v1/user/update",{
                 object:selectedAssetValue.value,
                 value,
                 wallets:walletAddress,
