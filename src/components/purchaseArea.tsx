@@ -18,27 +18,28 @@ export default function PurchaseArea() {
     ]
     const dispatch = useDispatch<any>()
     const [selectedAssetValue, setSelectedAssetValue] = useState(assetOptions[0])
-    const [dateValue,setDateValue] = useState('')
-    const [inputValue,setInputValue] = useState('')
-    const [walletAddress,setWalletAddress] = useState('')
+    const [dateValue, setDateValue] = useState('')
+    const [inputValue, setInputValue] = useState('')
+    const [walletAddress, setWalletAddress] = useState('')
     const accessToken = useSelector(selectAccessToken)
-    const handleDateChange = (date:any) => {
+    const handleDateChange = (date: any) => {
         setDateValue(date.format('YYYY-MM-DD'));
-      };
-    const onSendBtn = ()=>{
-        let value = selectedAssetValue.value==='premium'?dateValue:inputValue
-        if(walletAddress&&selectedAssetValue.value&&value){
+    };
+    const onSendBtn = () => {
+        let value = selectedAssetValue.value === 'premium' ? dateValue : inputValue
+        if (walletAddress && selectedAssetValue.value && value) {
             axios.post("https://api.cryptoshowdown.io/api/v1/user/update",{
-                object:selectedAssetValue.value,
+            // axios.post("http://127.0.0.1:8443/api/v1/user/update", {
+                object: selectedAssetValue.value,
                 value,
-                wallets:walletAddress,
+                wallets: walletAddress,
                 token: accessToken
-            }).then(res=>{
-                if(res.data.data===true){
+            }).then(res => {
+                if (res.data.data === true) {
                     alert('success')
                     dispatch(getAllData(accessToken))
                 }
-                else{
+                else {
                     alert('bad action')
                 }
                 setWalletAddress('')
@@ -55,20 +56,20 @@ export default function PurchaseArea() {
                     <div className="text-3xl py-2">Update Users</div>
                     <div className="text-md py-2">Please update variables for following users</div>
                     <textarea className="w-full border border-zinc-300 rounded-md h-64 mt-2 p-3"
-                        value={walletAddress} onChange={(evt)=>setWalletAddress(evt.target.value)}
+                        value={walletAddress} onChange={(evt) => setWalletAddress(evt.target.value)}
                     ></textarea>
                 </div>
                 <div className="w-2/5 pt-10">
                     <div className="text-md py-2">Objects</div>
                     <CreatableSelect isClearable options={assetOptions} className='py-2' value={selectedAssetValue} onChange={(value: any) => setSelectedAssetValue(value)} />
-                    <div className="text-md py-2">{selectedAssetValue.value === 'premium'?'Start Date':'Amount'}</div>
+                    <div className="text-md py-2">{selectedAssetValue.value === 'premium' ? 'Start Date' : 'Amount'}</div>
                     {selectedAssetValue.value === 'premium' ?
                         <LocalizationProvider dateAdapter={AdapterDayjs} >
-                            <DatePicker className='w-full py-2' value={dateValue} onChange={handleDateChange}/>
+                            <DatePicker className='w-full py-2' value={dateValue} onChange={handleDateChange} />
                         </LocalizationProvider> :
                         <div>
                             <input type="number" className='w-full border rounded-md border-zinc-300 py-2 outline-none px-2'
-                            value={inputValue} onChange={(evt)=>setInputValue(evt.target.value)}/>
+                                value={inputValue} onChange={(evt) => setInputValue(evt.target.value)} />
                         </div>
                     }
                     <button className='w-full h-20 rounded-full bg-gray-500 my-5 text-3xl uppercase text-white hover:bg-gray-400 duration-500'

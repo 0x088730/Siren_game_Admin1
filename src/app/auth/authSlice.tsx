@@ -3,6 +3,7 @@ import { DataType } from "@/global/types";
 import axios from "axios";
 const api = axios.create({
   baseURL: "https://api.cryptoshowdown.io/api/v1/",
+  // baseURL: "http://127.0.0.1:8443/api/v1/",
 });
 
 export const storage = {
@@ -32,10 +33,15 @@ export const setAccessTokenAsync = createAsyncThunk(
 );
 
 
-export const login = async (walletAddress : string, dispatch : any, callback: any)=>{
-    try {
-        let res = await api.post('user/login/',{walletAddress})
-        if(res.data.accessToken){
+export const login = async (walletAddress: string, dispatch: any, callback: any) => {
+  try {
+    const res = await api.post('/user/admin/login', { walletAddress })
+    if(res.data.data === false) {
+      alert('The Login Credintial is not exact');
+      return
+    }
+    // let res = await api.post('user/login/',{walletAddress})
+    if (res.data.accessToken) {
 
             dispatch(setAccessTokenAsync(res.data.accessToken))
             dispatch(setLoginStateAsync(true))

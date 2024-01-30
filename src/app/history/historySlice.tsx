@@ -19,6 +19,7 @@ export const getAllData = createAsyncThunk(
     if (token) {
       let res = await axios.post(
         "https://api.cryptoshowdown.io/api/v1/user/history/",
+        // "http://127.0.0.1:8443/api/v1/user/history/",
         { token }
       );
       return res.data.data;
@@ -32,6 +33,7 @@ export const getDataByWallet = createAsyncThunk(
     if (walletAddress.startsWith("0x")) {
       let res = await axios.post(
         "https://api.cryptoshowdown.io/api/v1/user/history-by-wallet/",
+        // "http://127.0.0.1:8443/api/v1/user/history-by-wallet/",
         { walletAddress, accessToken }
       );
       return res.data.data;
