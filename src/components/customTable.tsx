@@ -20,8 +20,11 @@ export interface DataType {
   category: string | null;
   age: number | null;
 }
+interface Props {
+  setPage: any
+}
 
-const CustomTable = () => {
+const CustomTable = ({ setPage }: Props) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [selectedWallet, setSelectedWallet] = useState("");
@@ -29,6 +32,7 @@ const CustomTable = () => {
   const showData: DataType[] = useSelector(
     (state: RootState) => state.history.data
   );
+  console.log(showData)
   const onHistoryBtn = (walletAddress: string) => {
     setSelectedWallet(walletAddress);
     setOpen(true);
@@ -127,42 +131,50 @@ const CustomTable = () => {
     },
   ];
   useEffect(() => {
-        dispatch(getAllData(accessToken) as unknown as AnyAction);
+    dispatch(getAllData(accessToken) as unknown as AnyAction);
   }, [accessToken]);
-    return (
-      <div className="pt-24">
-        <Box
-          sx={{
-            height: "70%",
-            width: "80%",
-            marginLeft: "auto",
-            marginRight: "auto",
-            overflowX: "hidden",
-          }}
-        >
-          <DataGrid
-            rows={showData}
-            columns={columns}
-            initialState={{
-              pagination: {
-                paginationModel: {
-                  pageSize: 10,
-                },
+  return (
+    <div className="pt-24">
+      <Box
+        sx={{
+          height: "70%",
+          width: "80%",
+          marginLeft: "auto",
+          marginRight: "auto",
+          overflowX: "hidden",
+        }}
+      >
+        <div className="text-end">
+          <button className='h-10 rounded-full bg-gray-500 my-5 px-3 text-2xl text-white hover:bg-gray-400 duration-500'
+            onClick={() => setPage('presale')}
+          >
+            Presale
+          </button>
+
+        </div>
+        <DataGrid
+          rows={showData}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 10,
               },
-            }}
-            pageSizeOptions={[10, 20, 40]}
-            checkboxSelection
-            disableRowSelectionOnClick
-          />
-        </Box>
-        <Modal open={open} onClose={() => setOpen(false)}>
-          <div className="w-4/5 bg-white mx-auto rounded-3xl px-20 py-16 mt-24 shadow-2xl  ">
-            <DetailTable walletAddress={selectedWallet} />
-          </div>
-          {/* <div style={{backgroundColor:'white'}}>asdf</div> */}
-        </Modal>
-      </div>
-    );
-    
+            },
+          }}
+          pageSizeOptions={[10, 20, 40]}
+          checkboxSelection
+          disableRowSelectionOnClick
+        />
+      </Box>
+      <Modal open={open} onClose={() => setOpen(false)}>
+        <div className="w-4/5 bg-white mx-auto rounded-3xl px-20 py-16 mt-24 shadow-2xl  ">
+          <DetailTable walletAddress={selectedWallet} />
+        </div>
+        {/* <div style={{backgroundColor:'white'}}>asdf</div> */}
+      </Modal>
+    </div>
+  );
+
 };
 export default CustomTable;
