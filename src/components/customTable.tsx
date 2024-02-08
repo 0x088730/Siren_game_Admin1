@@ -32,7 +32,6 @@ const CustomTable = ({ setPage }: Props) => {
   const showData: DataType[] = useSelector(
     (state: RootState) => state.history.data
   );
-  console.log(showData)
   const onHistoryBtn = (walletAddress: string) => {
     setSelectedWallet(walletAddress);
     setOpen(true);
