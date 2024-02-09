@@ -37,11 +37,7 @@ const PresalePage = ({ setPage }) => {
   }, [accessToken]);
   const modalOpen = (guest, event) => {
     setPosition({ x: event.clientX + 10, y: event.clientY });
-    const current = showUserList
-      .filter(user => guest.includes(user.userRef))
-      .map(user => user.walletAddress);
-
-    setModalData(current);
+    setModalData(guest);
     setRefModal(true);
   };
 
