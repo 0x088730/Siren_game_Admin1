@@ -14,6 +14,7 @@ import { FaHistory } from "@react-icons/all-files/fa/FaHistory";
 import Modal from "@mui/material/Modal";
 import DetailTable from "./modals/detailTable";
 import { selectAccessToken, selectLoginState } from "@/app/auth/authSlice";
+import { counterUser } from "@/app/api"
 export interface DataType {
   id: number | null;
   name: string | null;
@@ -28,15 +29,32 @@ const CustomTable = ({ setPage }: Props) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [selectedWallet, setSelectedWallet] = useState("");
+  const [countUser, setCountUser] = useState({
+    total: 0,
+    today: 0
+  });
+
   const accessToken = useSelector(selectAccessToken)
   const showData: DataType[] = useSelector(
     (state: RootState) => state.history.data
   );
-  console.log(showData)
   const onHistoryBtn = (walletAddress: string) => {
     setSelectedWallet(walletAddress);
     setOpen(true);
   };
+  useEffect(() => {
+    counterUser()
+      .then(res => {
+        if (res.count === false) {
+          alert(res.message);
+          setCountUser({ total: 0, today: 0 })
+        }
+        else {
+          setCountUser({ total: res.count, today: res.today })
+        }
+      }
+      );
+  }, [])
   const columns: GridColDef[] = [
     {
       field: "id",
@@ -144,12 +162,19 @@ const CustomTable = ({ setPage }: Props) => {
           overflowX: "hidden",
         }}
       >
-        <div className="text-end">
-          <button className='h-10 rounded-full bg-gray-500 my-5 px-3 text-2xl text-white hover:bg-gray-400 duration-500'
-            onClick={() => setPage('presale')}
-          >
-            Presale
-          </button>
+        <div className="flex justify-between items-center">
+          <div>
+            <div>Total Users: {countUser.total}</div>
+            <div>Today Users: {countUser.today}</div>
+          </div>
+          <div>
+            <button className='h-10 rounded-full bg-gray-500 my-5 px-3 text-2xl text-white hover:bg-gray-400 duration-500'
+              onClick={() => setPage('presale')}
+            >
+              Presale
+            </button>
+
+          </div>
 
         </div>
         <DataGrid
