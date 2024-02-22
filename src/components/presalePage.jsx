@@ -80,19 +80,19 @@ const PresalePage = ({ setPage }) => {
         </div>
         {nav === "transaction7" ? <div className="w-full flex justify-center items-center flex-col">
           {showReferData.map(({ createdAt, amount, walletAddress, refLink }, index) => (
-            <div key={index} className="border-b-2 border-black my-[10px] w-[1024px]">date: {createdAt} | amount: {amount && amount.usdt} usdt got {amount && amount.csc} csc | wallet: {walletAddress} | reflink: {refLink}</div>
+            <div key={index} className="border-b-2 border-black my-[10px] w-[1024px]">{index + 1}.  date: {createdAt} | amount: {amount && amount.usdt} usdt got {amount && amount.csc} csc | wallet: {walletAddress} | reflink: {refLink}</div>
           ))}
         </div>
           :
           nav === "transaction8" ? <div className="w-full flex justify-center items-center flex-col">
             {showReferData.map(({ createdAt, amount, walletAddress, refLink }, index) => (
-              <div key={index} className="border-b-2 border-black my-[10px] w-[1024px]">date: {createdAt} | amount: {amount && amount.usdt} usdt got {amount && amount.csc} csc | wallet: {walletAddress} | reflink: {refLink}</div>
+              <div key={index} className="border-b-2 border-black my-[10px] w-[1024px]">{index + 1}.  date: {createdAt} | amount: {amount && amount.usdt} usdt got {amount && amount.csc} csc | wallet: {walletAddress} | reflink: {refLink}</div>
             ))}
           </div>
             :
             nav === "transaction9" ? <div className="w-full flex justify-center items-center flex-col">
               {showReferData.map(({ createdAt, amount, walletAddress, refLink }, index) => (
-                <div key={index} className="border-b-2 border-black my-[10px] w-[1024px]">date: {createdAt} | amount: {amount && amount.usdt} usdt got {amount && amount.csc} csc | wallet: {walletAddress} | reflink: {refLink}</div>
+                <div key={index} className="border-b-2 border-black my-[10px] w-[1024px]">{index + 1}.  date: {createdAt} | amount: {amount && amount.usdt} usdt got {amount && amount.csc} csc | wallet: {walletAddress} | reflink: {refLink}</div>
               ))}
             </div>
               :
@@ -102,7 +102,7 @@ const PresalePage = ({ setPage }) => {
                 :
                 nav === "usdt" ? <div className="w-full flex justify-center items-center flex-col">
                   {showWithdrawData.map(({ createdAt, amount, walletAddress, ref, refLink }, index) => (
-                    <div key={index} className="border-b-2 border-black my-[10px] w-[1024px]">date: {createdAt} | withdraw usdt: {amount} | ref: {ref} | wallet: {walletAddress} | reflink: {refLink}</div>
+                    <div key={index} className="border-b-2 border-black my-[10px] w-[1024px]">{index + 1}.  date: {createdAt} | withdraw usdt: {amount} | ref: {ref} | wallet: {walletAddress} | reflink: {refLink}</div>
                   ))}
                 </div>
                   :
