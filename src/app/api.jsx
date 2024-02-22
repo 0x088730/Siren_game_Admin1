@@ -1,8 +1,8 @@
 import axios from 'axios'
+import config from './config';
 
 const api = axios.create({
-    // baseURL: 'http://127.0.0.1:8443/api/v1/user/',
-    baseURL: "https://api.cryptoshowdown.io/api/v1/user/",
+    baseURL: `${config.server}${config.baseURL}/user/`,
 });
 export const counterUser = async () => {
     const response = await api.post('userLP/counterUser', {});

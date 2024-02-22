@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { DataType } from "@/global/types";
+import config from "../config";
 import axios from "axios";
 
 export const userList = createAsyncThunk(
@@ -7,8 +8,7 @@ export const userList = createAsyncThunk(
   async (token: string) => {
     if (token) {
       let res = await axios.post(
-        // "http://127.0.0.1:8443/api/v1/user/userLP/userList/",
-        "https://api.cryptoshowdown.io/api/v1/user/userLP/userList/",
+        `${config.server}${config.baseURL}/user/userLP/userList/`,
         { token }
       );
       return res.data.data;

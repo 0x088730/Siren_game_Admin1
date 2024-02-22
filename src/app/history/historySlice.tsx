@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { DataType } from "@/global/types";
+import config from "../config";
 import axios from "axios";
 
 const data: DataType[] = [
@@ -18,8 +19,7 @@ export const getAllData = createAsyncThunk(
   async (token: string) => {
     if (token) {
       let res = await axios.post(
-        "https://api.cryptoshowdown.io/api/v1/user/history/",
-        // "http://127.0.0.1:8443/api/v1/user/history/",
+        `${config.server}${config.baseURL}/user/history/`,
         { token }
       );
       return res.data.data;
@@ -32,8 +32,7 @@ export const getDataByWallet = createAsyncThunk(
   async ({ walletAddress, accessToken }: any) => {
     if (walletAddress.startsWith("0x")) {
       let res = await axios.post(
-        "https://api.cryptoshowdown.io/api/v1/user/history-by-wallet/",
-        // "http://127.0.0.1:8443/api/v1/user/history-by-wallet/",
+        `${config.server}${config.baseURL}/user/history-by-wallet/`,
         { walletAddress, accessToken }
       );
       return res.data.data;

@@ -65,7 +65,8 @@ const PresalePage = ({ setPage }) => {
       >
         <div className="flex justify-center relative">
           <div className="flex justify-center items-center h-10 my-5 font-bold ">
-            <div className={`hover:text-[#35ee5a] ${nav === "transaction8" ? "text-[#35ee5a]" : ""} cursor-pointer pe-[7px]`} onClick={() => setNav("transaction8")}>0.08$transaction</div> |
+            <div className={`hover:text-[#35ee5a] ${nav === "transaction9" ? "text-[#35ee5a]" : ""} cursor-pointer pe-[7px]`} onClick={() => setNav("transaction9")}>0.09$transaction</div> |
+            <div className={`hover:text-[#35ee5a] ${nav === "transaction8" ? "text-[#35ee5a]" : ""} cursor-pointer px-[7px]`} onClick={() => setNav("transaction8")}>0.08$transaction</div> |
             <div className={`hover:text-[#35ee5a] ${nav === "transaction7" ? "text-[#35ee5a]" : ""} cursor-pointer px-[7px]`} onClick={() => setNav("transaction7")}>0.07$transaction</div> |
             <div className={`hover:text-[#35ee5a] ${nav === "csc" ? "text-[#35ee5a]" : ""} cursor-pointer px-[7px]`} onClick={() => setNav("csc")}>csc token</div> |
             <div className={`hover:text-[#35ee5a] ${nav === "usdt" ? "text-[#35ee5a]" : ""} cursor-pointer px-[7px]`} onClick={() => setNav("usdt")}>usdt token</div> |
@@ -89,21 +90,27 @@ const PresalePage = ({ setPage }) => {
             ))}
           </div>
             :
-            nav === "csc" ? <div className="w-full flex justify-center items-center flex-col">
-
+            nav === "transaction9" ? <div className="w-full flex justify-center items-center flex-col">
+              {showReferData.map(({ createdAt, amount, walletAddress, refLink }, index) => (
+                <div key={index} className="border-b-2 border-black my-[10px] w-[1024px]">date: {createdAt} | amount: {amount && amount.usdt} usdt got {amount && amount.csc} csc | wallet: {walletAddress} | reflink: {refLink}</div>
+              ))}
             </div>
               :
-              nav === "usdt" ? <div className="w-full flex justify-center items-center flex-col">
-                {showWithdrawData.map(({ createdAt, amount, walletAddress, ref, refLink }, index) => (
-                  <div key={index} className="border-b-2 border-black my-[10px] w-[1024px]">date: {createdAt} | withdraw usdt: {amount} | ref: {ref} | wallet: {walletAddress} | reflink: {refLink}</div>
-                ))}
+              nav === "csc" ? <div className="w-full flex justify-center items-center flex-col">
+
               </div>
                 :
-                <div className="w-full flex justify-center items-center flex-col">
-                  {showUserList.map(({ walletAddress, Ref, usdt, guest }, index) => (
-                    <div key={index} className="border-b-2 border-black my-[10px] w-[768px]">user #{index + 1} | wallet: {walletAddress} | Ref: <span className="text-[#35ee5a] font-bold text-[20px] cursor-pointer" onClick={(e) => modalOpen(guest, e)}>{Ref}</span>  Earned usdt: {Number.isInteger(usdt) ? usdt : Number(usdt).toFixed(2)}</div>
+                nav === "usdt" ? <div className="w-full flex justify-center items-center flex-col">
+                  {showWithdrawData.map(({ createdAt, amount, walletAddress, ref, refLink }, index) => (
+                    <div key={index} className="border-b-2 border-black my-[10px] w-[1024px]">date: {createdAt} | withdraw usdt: {amount} | ref: {ref} | wallet: {walletAddress} | reflink: {refLink}</div>
                   ))}
                 </div>
+                  :
+                  <div className="w-full flex justify-center items-center flex-col">
+                    {showUserList.map(({ walletAddress, Ref, usdt, guest }, index) => (
+                      <div key={index} className="border-b-2 border-black my-[10px] w-[768px]">user #{index + 1} | wallet: {walletAddress} | Ref: <span className="text-[#35ee5a] font-bold text-[20px] cursor-pointer" onClick={(e) => modalOpen(guest, e)}>{Ref}</span>  Earned usdt: {Number.isInteger(usdt) ? usdt : Number(usdt).toFixed(2)}</div>
+                    ))}
+                  </div>
         }
         <RefModal refModal={refModal} setRefModal={setRefModal} modalData={modalData} position={position} />
       </Box>
