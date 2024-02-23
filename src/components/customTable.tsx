@@ -96,8 +96,8 @@ const CustomTable = ({ setPage }: Props) => {
       align: "center",
     },
     {
-      field: "Siren",
-      headerName: "Siren",
+      field: "cscTokenAmount",
+      headerName: "CSC",
       type: "number",
 
       flex: 2,
