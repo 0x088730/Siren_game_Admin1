@@ -27,10 +27,7 @@ const DetailTable = ({ walletAddress }: PropsType) => {
         unopened: 0,
         opened: 0
     });
-    const showData: DataType[] = useSelector(
-        (state: RootState) => state.history.detail
-    );
-
+    const [showData, setShowData] = useState([]);
     const columns: GridColDef[] = [
         {
             field: 'id',
@@ -82,9 +79,9 @@ const DetailTable = ({ walletAddress }: PropsType) => {
 
     ];
     useEffect(() => {
-        dispatch(getDataByWallet({ walletAddress, accessToken }) as unknown as AnyAction)
         getItems(walletAddress, accessToken)
             .then(res => {
+                setShowData(res.log)
                 setFightCount(res.totalCount);
                 let currentArray = [];
                 let opened = 0;
