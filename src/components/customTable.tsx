@@ -168,11 +168,18 @@ const CustomTable = ({ setPage }: Props) => {
             <div>Today Users: {countUser.today}</div>
           </div>
           <div>
-            <button className='h-10 rounded-full bg-gray-500 my-5 px-3 text-2xl text-white hover:bg-gray-400 duration-500'
-              onClick={() => setPage('presale')}
-            >
-              Presale
-            </button>
+            <div>
+              <button className='h-10 rounded-full bg-gray-500 my-5 px-3 text-2xl text-white hover:bg-gray-400 duration-500 mx-4'
+                onClick={() => setPage('battle')}
+              >
+                Battle Pass
+              </button>
+              <button className='h-10 rounded-full bg-gray-500 my-5 px-3 text-2xl text-white hover:bg-gray-400 duration-500'
+                onClick={() => setPage('presale')}
+              >
+                Presale
+              </button>
+            </div>
 
           </div>
 

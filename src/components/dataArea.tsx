@@ -4,6 +4,7 @@ import PurchaseArea from "./purchaseArea";
 import { selectLoginState } from "@/app/auth/authSlice";
 import { useState } from "react";
 import PresalePage from "./presalePage";
+import BattlePass from "./battlePass"
 
 export default function DataArea() {
   const loginState = useSelector(selectLoginState);
@@ -19,9 +20,14 @@ export default function DataArea() {
               <PurchaseArea />
             </>
             :
-            <>
-              <PresalePage setPage={setPage} />
-            </>
+            page === "battle" ?
+              <>
+                <BattlePass setPage={setPage} />
+              </>
+              :
+              <>
+                <PresalePage setPage={setPage} />
+              </>
           }
         </>
       ) : (

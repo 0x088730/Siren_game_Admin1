@@ -23,3 +23,8 @@ export const getItems = async (walletAddress, accessToken) => {
     const response = await api.post('getItems/', { walletAddress, accessToken });
     return response.data;
 }
+
+export const getRewardList = async (token) => {
+    const response = await api.post('getRewardList/', { token });
+    return response.data;
+}
