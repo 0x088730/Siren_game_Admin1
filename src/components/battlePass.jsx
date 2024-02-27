@@ -66,7 +66,7 @@ const BattlePass = ({ setPage }) => {
         <div className="w-full flex justify-center items-center flex-col">
           {rewardData.map((item, index) => (
             item.available === true ?
-              <div key={index} className="border-b-2 border-black my-[10px] w-[1024px] cursor-pointer flex justify-center" onClick={(e) => modalOpen(item._doc, e)}><span className="w-[75%]">{index + 1}.  wallet address: {item.walletAddress} | date: {item.buyDate}</span></div>
+              <div key={index} className="border-b-2 border-black my-[10px] w-[1024px] cursor-pointer flex justify-center" onClick={(e) => modalOpen(item._doc, e)}><span className="w-[75%]">wallet address: {item.walletAddress} | date: {item.buyDate}</span></div>
               : null
           ))}
         </div>
