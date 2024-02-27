@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
 const RewardModal = ({ rewardModal, setRewardModal, modalData, position }) => {
-    console.log(modalData)
     const [presentData, setPresentData] = React.useState([]);
 
     React.useEffect(() => {
