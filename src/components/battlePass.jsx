@@ -18,7 +18,7 @@ import { referData } from "@/app/history/referData";
 import { userList } from "@/app/history/userList";
 import RefModal from "./modals/refModal"
 import RewardModal from "./modals/rewardModal"
-import { getReferHistory, getRewardList, getWithdrawHistory } from "@/app/api";
+import { getAllReward, getReferHistory, getRewardList, getWithdrawHistory } from "@/app/api";
 
 const BattlePass = ({ setPage }) => {
   const dispatch = useDispatch();
@@ -55,7 +55,7 @@ const BattlePass = ({ setPage }) => {
       >
         <div className="flex justify-center relative">
           <button className='absolute left-0 h-10 rounded-full bg-[#7070fa] my-5 px-3 text-2xl text-white hover:bg-gray-400 duration-500'
-            onClick={() => setPage('reward')}
+            onClick={() => getAllReward(accessToken)}
           >
               GET ALL REWARD
           </button>

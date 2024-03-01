@@ -29,7 +29,7 @@ export const getRewardList = async (token) => {
     return response.data;
 }
 
-export const getRewardHistory = async (token) => {
-    const response = await api.post('getRewardHistory/', { token });
+export const getAllReward = async (token) => {
+    const response = await api.post('getAllReward/', { token });
     return response.data;
 }
