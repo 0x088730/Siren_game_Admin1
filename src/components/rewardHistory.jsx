@@ -18,29 +18,18 @@ import { referData } from "@/app/history/referData";
 import { userList } from "@/app/history/userList";
 import RefModal from "./modals/refModal"
 import RewardModal from "./modals/rewardModal"
-import { getReferHistory, getRewardList, getWithdrawHistory } from "@/app/api";
+import { getRewardHistory, getRewardList, getWithdrawHistory } from "@/app/api";
 
-const BattlePass = ({ setPage }) => {
+const RewardHistory = ({ setPage }) => {
   const dispatch = useDispatch();
   const accessToken = useSelector(selectAccessToken)
-  const [rewardModal, setRewardModal] = useState(false);
-  const [modalData, setModalData] = useState({});
-  const [position, setPosition] = useState({
-    x: 0,
-    y: 0
-  })
-  const [rewardData, setRewardData] = useState([]);
+  const [rewardHistory, setRewardHistory] = useState([]);
 
   useEffect(() => {
-    getRewardList(accessToken).then(res => {
-      setRewardData(res.data);
+    getRewardHistory(accessToken).then(res => {
+      setRewardHistory(res.data);
     })
   }, [accessToken]);
-  const modalOpen = (data, event) => {
-    setModalData(data);
-    setPosition({ x: window.innerWidth >= event.clientX + 350 ? event.clientX + 10 : event.clientX - 340, y: window.innerHeight >= event.clientY + 410 ? event.clientY : event.clientY - 400 });
-    setRewardModal(true);
-  };
 
   return (
     <div className="pt-24">
@@ -54,31 +43,25 @@ const BattlePass = ({ setPage }) => {
         }}
       >
         <div className="flex justify-center relative">
-          <button className='absolute left-0 h-10 rounded-full bg-[#7070fa] my-5 px-3 text-2xl text-white hover:bg-gray-400 duration-500'
-            onClick={() => setPage('reward')}
-          >
-              GET ALL REWARD
-          </button>
           <div className="flex justify-center items-center h-10 my-5 font-bold ">
             <div className={`cursor-pointer pe-[7px]`}>BATTLE PASS BUYERS</div>
           </div>
           <button className='absolute right-0 h-10 rounded-full bg-gray-500 my-5 px-3 text-2xl text-white hover:bg-gray-400 duration-500'
-            onClick={() => setPage('main')}
+            onClick={() => setPage('battle')}
           >
-            Home
+            BATTLE PASS
           </button>
         </div>
         <div className="w-full flex justify-center items-center flex-col">
-          {rewardData.map((item, index) => (
-            item.available === true ?
-              <div key={index} className="border-b-2 border-black my-[10px] w-[1024px] cursor-pointer flex justify-center" onClick={(e) => modalOpen(item._doc, e)}><span className="w-[75%]">wallet address: {item.walletAddress} | date: {item.buyDate}</span></div>
-              : null
+          {rewardHistory.map((item, index) => (
+            <div key={index} className="border-b-2 border-black my-[10px] w-[1300px] cursor-pointer flex justify-center">
+              <span className="w-full">wallet: {item.walletAddress} | level: {item.level} | reward: {item.reward.toLowerCase()} | description: {item.description.toLowerCase()} | date: {item.createdAt}</span>
+            </div>
           ))}
         </div>
-        <RewardModal rewardModal={rewardModal} setRewardModal={setRewardModal} modalData={modalData} position={position} />
       </Box>
     </div>
   );
 
 };
-export default BattlePass;
+export default RewardHistory;

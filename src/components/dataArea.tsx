@@ -5,6 +5,7 @@ import { selectLoginState } from "@/app/auth/authSlice";
 import { useState } from "react";
 import PresalePage from "./presalePage";
 import BattlePass from "./battlePass"
+import RewardHistory from "./rewardHistory"
 
 export default function DataArea() {
   const loginState = useSelector(selectLoginState);
@@ -25,9 +26,14 @@ export default function DataArea() {
                 <BattlePass setPage={setPage} />
               </>
               :
-              <>
-                <PresalePage setPage={setPage} />
-              </>
+              page === "reward" ?
+                <>
+                  <RewardHistory setPage={setPage} />
+                </>
+                :
+                <>
+                  <PresalePage setPage={setPage} />
+                </>
           }
         </>
       ) : (

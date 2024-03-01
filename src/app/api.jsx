@@ -28,3 +28,8 @@ export const getRewardList = async (token) => {
     const response = await api.post('getRewardList/', { token });
     return response.data;
 }
+
+export const getRewardHistory = async (token) => {
+    const response = await api.post('getRewardHistory/', { token });
+    return response.data;
+}
