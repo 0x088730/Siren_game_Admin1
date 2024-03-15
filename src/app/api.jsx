@@ -33,3 +33,8 @@ export const getAllReward = async (token) => {
     const response = await api.post('getAllReward/', { token });
     return response.data;
 }
+
+export const getLoginsHistory = async (token) => {
+    const response = await api.post('getLoginsHistory/', { token });
+    return response.data;
+}
