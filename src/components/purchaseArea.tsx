@@ -13,9 +13,12 @@ import config from '@/app/config';
 export default function PurchaseArea() {
     const assetOptions = [
         { value: 'premium', label: 'Premium' },
-        { value: 'Siren', label: 'Siren' },
+        { value: 'cscTokenAmount', label: 'CSC' },
         { value: 'eggs', label: 'Resource' },
-        { value: 'resource', label: 'Water' }
+        { value: 'resource', label: 'Water' },
+        { value: 'common', label: 'common' },
+        { value: 'rare', label: 'rare' },
+        { value: 'legendary', label: 'legendary' },
     ]
     const dispatch = useDispatch<any>()
     const [selectedAssetValue, setSelectedAssetValue] = useState(assetOptions[0])
