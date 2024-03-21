@@ -16,12 +16,18 @@ export default function PurchaseArea() {
         { value: 'cscTokenAmount', label: 'CSC' },
         { value: 'eggs', label: 'Resource' },
         { value: 'resource', label: 'Water' },
+        { value: 'rena', label: 'Rena' },
+        { value: 'motoko', label: 'Motoko' },
+        { value: 'hayate', label: 'Hayate' },
+    ]
+    const rarity = [
         { value: 'common', label: 'common' },
         { value: 'rare', label: 'rare' },
         { value: 'legendary', label: 'legendary' },
     ]
     const dispatch = useDispatch<any>()
     const [selectedAssetValue, setSelectedAssetValue] = useState(assetOptions[0])
+    const [rarityValue, setRarityValue] = useState(rarity[0])
     const [dateValue, setDateValue] = useState('')
     const [inputValue, setInputValue] = useState('')
     const [walletAddress, setWalletAddress] = useState('')
@@ -30,13 +36,14 @@ export default function PurchaseArea() {
         setDateValue(date.format('YYYY-MM-DD'));
     };
     const onSendBtn = () => {
-        let value = selectedAssetValue.value === 'premium' ? dateValue : inputValue
+        let value = selectedAssetValue.value === 'premium' ? dateValue : (selectedAssetValue.value === 'rena' || selectedAssetValue.value === 'motoko' || selectedAssetValue.value === 'hayate') ? rarityValue : inputValue
         if (walletAddress && selectedAssetValue.value && value) {
             axios.post(`${config.server}${config.baseURL}/user/update`, {
                 object: selectedAssetValue.value,
                 value,
                 wallets: walletAddress,
-                token: accessToken
+                token: accessToken,
+                rarity: rarityValue.value
             }).then(res => {
                 if (res.data.data === true) {
                     alert('success')
@@ -69,11 +76,15 @@ export default function PurchaseArea() {
                     {selectedAssetValue.value === 'premium' ?
                         <LocalizationProvider dateAdapter={AdapterDayjs} >
                             <DatePicker className='w-full py-2' value={dateValue} onChange={handleDateChange} />
-                        </LocalizationProvider> :
-                        <div>
-                            <input type="number" className='w-full border rounded-md border-zinc-300 py-2 outline-none px-2'
-                                value={inputValue} onChange={(evt) => setInputValue(evt.target.value)} />
-                        </div>
+                        </LocalizationProvider>
+                        :
+                        (selectedAssetValue.value === "rena" || selectedAssetValue.value === "motoko" || selectedAssetValue.value === "hayate") ?
+                            <CreatableSelect isClearable options={rarity} className='py-2' value={rarityValue} onChange={(value: any) => setRarityValue(value)} />
+                            :
+                            <div>
+                                <input type="number" className='w-full border rounded-md border-zinc-300 py-2 outline-none px-2'
+                                    value={inputValue} onChange={(evt) => setInputValue(evt.target.value)} />
+                            </div>
                     }
                     <button className='w-full h-20 rounded-full bg-gray-500 my-5 text-3xl uppercase text-white hover:bg-gray-400 duration-500'
                         onClick={onSendBtn}
