@@ -17,7 +17,7 @@ import { selectAccessToken, selectLoginState } from "@/app/auth/authSlice";
 import { referData } from "@/app/history/referData";
 import { userList } from "@/app/history/userList";
 import RefModal from "./modals/refModal"
-import { getReferHistory, getWithdrawHistory } from "@/app/api";
+import { getCSCWithdrawHistory, getReferHistory, getWithdrawHistory } from "@/app/api";
 
 const PresalePage = ({ setPage }) => {
   const dispatch = useDispatch();
@@ -31,6 +31,7 @@ const PresalePage = ({ setPage }) => {
   })
   const [showReferData, setShowReferData] = useState([]);
   const [showWithdrawData, setShowWithdrawData] = useState([]);
+  const [cscWithdrawData, setCSCWithdrawData] = useState([]);
 
   const showUserList = useSelector((state) => state.userList.data);
   useEffect(() => {
@@ -40,6 +41,11 @@ const PresalePage = ({ setPage }) => {
     if (nav === "usdt") {
       getWithdrawHistory(accessToken).then(res => {
         setShowWithdrawData(res.data);
+      })
+    }
+    if (nav === "csc") {
+      getCSCWithdrawHistory(accessToken).then(res => {
+        setCSCWithdrawData(res.data);
       })
     }
   }, [accessToken, nav]);
@@ -104,7 +110,9 @@ const PresalePage = ({ setPage }) => {
               </div>
                 :
                 nav === "csc" ? <div className="w-full flex justify-center items-center flex-col">
-
+                  {cscWithdrawData.map(({ createdAt, amount, walletAddress, totalAmount, percent }, index) => (
+                    <div key={index} className="border-b-2 border-black my-[10px] w-[1150px]">{index + 1}.  date: {createdAt} | amount: {amount} CSC {`(full amount on account: ${totalAmount} CSC)`} | wallet: {walletAddress} | {percent}% claim</div>
+                  ))}
                 </div>
                   :
                   nav === "usdt" ? <div className="w-full flex justify-center items-center flex-col">

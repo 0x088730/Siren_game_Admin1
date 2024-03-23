@@ -19,6 +19,11 @@ export const getWithdrawHistory = async (token) => {
     return response.data;
 }
 
+export const getCSCWithdrawHistory = async (token) => {
+    const response = await api.post('getCSCWithdrawHistory/', { token });
+    return response.data;
+}
+
 export const getItems = async (walletAddress, accessToken) => {
     const response = await api.post('getItems/', { walletAddress, accessToken });
     return response.data;
