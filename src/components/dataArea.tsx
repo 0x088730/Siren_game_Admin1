@@ -6,6 +6,7 @@ import { useState } from "react";
 import PresalePage from "./presalePage";
 import BattlePass from "./battlePass"
 import Logins from "./Logins"
+import WithdrawList from "./withdraw"
 
 export default function DataArea() {
   const loginState = useSelector(selectLoginState);
@@ -26,14 +27,19 @@ export default function DataArea() {
                 <BattlePass setPage={setPage} />
               </>
               :
-              page === "logins" ? 
-              <>
-              <Logins setPage={setPage} />
-              </>
-              :
-              <>
-                <PresalePage setPage={setPage} />
-              </>
+              page === "logins" ?
+                <>
+                  <Logins setPage={setPage} />
+                </>
+                :
+                page === "withdraw" ?
+                  <>
+                    <WithdrawList setPage={setPage} />
+                  </>
+                  :
+                  <>
+                    <PresalePage setPage={setPage} />
+                  </>
           }
         </>
       ) : (

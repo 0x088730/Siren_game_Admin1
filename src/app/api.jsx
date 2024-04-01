@@ -15,7 +15,17 @@ export const getReferHistory = async (token, transaction) => {
 }
 
 export const getWithdrawHistory = async (token) => {
-    const response = await api.post('withdrawHistory/', { token });
+    const response = await api.post('getWithdrawHistory/', { token });
+    return response.data;
+}
+
+export const setWithdrawConfirm = async (token, withdraw) => {
+    const response = await api.post('setWithdrawConfirm/', { token, withdraw });
+    return response.data;
+}
+
+export const getUSDTWithdrawHistory = async (token) => {
+    const response = await api.post('getUSDTWithdrawHistory/', { token });
     return response.data;
 }
 

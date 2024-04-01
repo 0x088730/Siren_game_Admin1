@@ -170,6 +170,11 @@ const CustomTable = ({ setPage }: Props) => {
           <div>
             <div>
               <button className='h-10 rounded-full bg-gray-500 my-5 px-3 text-2xl text-white hover:bg-gray-400 duration-500 mx-4'
+                onClick={() => setPage('withdraw')}
+              >
+                Withdraw
+              </button>
+              <button className='h-10 rounded-full bg-gray-500 my-5 px-3 text-2xl text-white hover:bg-gray-400 duration-500 mx-4'
                 onClick={() => setPage('logins')}
               >
                 Logins
