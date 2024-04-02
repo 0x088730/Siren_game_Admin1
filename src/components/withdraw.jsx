@@ -15,7 +15,6 @@ const WithdrawList = ({ setPage }) => {
     }, [accessToken]);
 
     const withdrawConfirm = (item) => {
-        console.log(item, accessToken)
         setWithdrawConfirm(accessToken, item).then(res => {
             if (res.data === false) {
                 alert(res.message);
@@ -48,8 +47,8 @@ const WithdrawList = ({ setPage }) => {
                 </div>
                 <div className="w-full flex justify-center items-center flex-col">
                     {withdrawData.map((item, index) => (
-                        <div key={index} className={`${item.withdrawStatus ? "bg-green-400" : ""} border-b-2 border-black my-[10px] w-[1100px] flex justify-center`}>
-                            <span className="w-full">{index + 1}. date: {item.createdAt} | amount: {item.amount} CSC {`(full amount on account: ${item.totalAmount})`} | wallet address: {item.walletAddress}</span>
+                        <div key={index} className={`${item.withdrawStatus ? "bg-green-400" : ""} border-b-2 border-black my-[10px] w-[1250px] flex justify-center`}>
+                            <span className="w-full">{index + 1}. date: {item.createdAt} | amount: {item.amount} CSC {`(full amount on account: ${item.totalAmount})`} | wallet address: {item.walletAddress} | price: ${item.tokenPrice}</span>
                             <div className={`${item.withdrawStatus ? "hidden" : "block"} cursor-pointer text-black font-bold hover:text-red-600`} onClick={() => withdrawConfirm(item)}>confirm</div>
                         </div>
                     ))}
