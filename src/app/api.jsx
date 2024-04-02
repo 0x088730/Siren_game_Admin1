@@ -14,6 +14,11 @@ export const getReferHistory = async (token, transaction) => {
     return response.data;
 }
 
+export const getDepositHistory = async (token) => {
+    const response = await api.post('getDepositHistory/', { token });
+    return response.data;
+}
+
 export const getWithdrawHistory = async (token) => {
     const response = await api.post('getWithdrawHistory/', { token });
     return response.data;

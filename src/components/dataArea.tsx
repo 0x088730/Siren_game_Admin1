@@ -7,6 +7,7 @@ import PresalePage from "./presalePage";
 import BattlePass from "./battlePass"
 import Logins from "./Logins"
 import WithdrawList from "./withdraw"
+import DepositList from "./deposit"
 
 export default function DataArea() {
   const loginState = useSelector(selectLoginState);
@@ -37,9 +38,14 @@ export default function DataArea() {
                     <WithdrawList setPage={setPage} />
                   </>
                   :
-                  <>
-                    <PresalePage setPage={setPage} />
-                  </>
+                  page === "deposit" ?
+                    <>
+                      <DepositList setPage={setPage} />
+                    </>
+                    :
+                    <>
+                      <PresalePage setPage={setPage} />
+                    </>
           }
         </>
       ) : (
