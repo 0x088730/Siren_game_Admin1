@@ -106,8 +106,8 @@ const CustomTable = ({ setPage }: Props) => {
       align: "center",
     },
     {
-      field: "eggs",
-      headerName: "Resource",
+      field: "water",
+      headerName: "Water",
       type: "number",
       flex: 1,
       editable: true,
@@ -116,7 +116,7 @@ const CustomTable = ({ setPage }: Props) => {
     },
     {
       field: "resource",
-      headerName: "Water",
+      headerName: "Resource",
       type: "number",
       flex: 1,
       editable: true,

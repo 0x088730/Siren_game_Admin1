@@ -14,8 +14,8 @@ export default function PurchaseArea() {
     const assetOptions = [
         { value: 'premium', label: 'Premium' },
         { value: 'cscTokenAmount', label: 'CSC' },
-        { value: 'eggs', label: 'Resource' },
-        { value: 'resource', label: 'Water' },
+        { value: 'water', label: 'Water' },
+        { value: 'resource', label: 'Resource' },
         { value: 'rena', label: 'Rena' },
         { value: 'motoko', label: 'Motoko' },
         { value: 'hayate', label: 'Hayate' },
