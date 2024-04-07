@@ -54,11 +54,11 @@ const BattlePass = ({ setPage }) => {
         }}
       >
         <div className="flex justify-center relative">
-          <button className='absolute left-0 h-10 rounded-full bg-[#7070fa] my-5 px-3 text-2xl text-white hover:bg-gray-400 duration-500'
+          {/* <button className='absolute left-0 h-10 rounded-full bg-[#7070fa] my-5 px-3 text-2xl text-white hover:bg-gray-400 duration-500'
             onClick={() => getAllReward(accessToken)}
           >
               GET ALL REWARD
-          </button>
+          </button> */}
           <div className="flex justify-center items-center h-10 my-5 font-bold ">
             <div className={`cursor-pointer pe-[7px]`}>BATTLE PASS BUYERS</div>
           </div>
