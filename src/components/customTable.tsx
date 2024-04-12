@@ -20,6 +20,7 @@ export interface DataType {
   name: string | null;
   category: string | null;
   age: number | null;
+  walletAddress: string | null;
 }
 interface Props {
   setPage: any
@@ -33,6 +34,8 @@ const CustomTable = ({ setPage }: Props) => {
     total: 0,
     today: 0
   });
+  const [searchName, setSearchName] = useState("");
+  const [showList, setShowList] = useState([] as DataType[]);
 
   const accessToken = useSelector(selectAccessToken)
   const showData: DataType[] = useSelector(
@@ -42,6 +45,7 @@ const CustomTable = ({ setPage }: Props) => {
     setSelectedWallet(walletAddress);
     setOpen(true);
   };
+
   useEffect(() => {
     counterUser()
       .then(res => {
@@ -55,6 +59,26 @@ const CustomTable = ({ setPage }: Props) => {
       }
       );
   }, [])
+
+  useEffect(() => {
+    setShowList(showData);
+  }, [showData])
+
+  useEffect(() => {
+    if (searchName !== "") {
+      setShowList([]);
+      let currentArray: DataType[] = [];
+      for (let i = 0; i < showData.length; i++) {
+        if (showData[i].walletAddress?.includes(searchName)) {
+          currentArray.push(showData[i]);
+        }
+      }
+      setShowList(currentArray);
+    } else {
+      setShowList(showData);
+    }
+  }, [searchName])
+
   const columns: GridColDef[] = [
     {
       field: "id",
@@ -168,6 +192,14 @@ const CustomTable = ({ setPage }: Props) => {
             <div>Today Users: {countUser.today}</div>
           </div>
           <div>
+            <input
+              className='h-[40px] w-[260px] rounded-lg border-[1px] border-[#2f2f2f]/[0.6] bg-[#D9E1FF]/[0.5] text-[#000000] text-[14px] px-2'
+              name="name"
+              placeholder='enter wallet address'
+              onChange={(e) => { setSearchName(e.target.value); }}
+            />
+          </div>
+          <div>
             <div>
               <button className='h-10 rounded-full bg-gray-500 my-5 px-3 text-2xl text-white hover:bg-gray-400 duration-500 mx-4'
                 onClick={() => setPage('deposit')}
@@ -200,7 +232,7 @@ const CustomTable = ({ setPage }: Props) => {
 
         </div>
         <DataGrid
-          rows={showData}
+          rows={showList}
           columns={columns}
           initialState={{
             pagination: {
