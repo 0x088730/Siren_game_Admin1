@@ -8,6 +8,7 @@ import BattlePass from "./battlePass"
 import Logins from "./Logins"
 import WithdrawList from "./withdraw"
 import DepositList from "./deposit"
+import Bonus from "./Bonus"
 
 export default function DataArea() {
   const loginState = useSelector(selectLoginState);
@@ -43,9 +44,14 @@ export default function DataArea() {
                       <DepositList setPage={setPage} />
                     </>
                     :
-                    <>
-                      <PresalePage setPage={setPage} />
-                    </>
+                    page === "bonus" ?
+                      <>
+                        <Bonus setPage={setPage} />
+                      </>
+                      :
+                      <>
+                        <PresalePage setPage={setPage} />
+                      </>
           }
         </>
       ) : (

@@ -58,3 +58,8 @@ export const getLoginsHistory = async (token) => {
     const response = await api.post('getLoginsHistory/', { token });
     return response.data;
 }
+
+export const getBonusHistory = async (token) => {
+    const response = await api.post('getBonusHistory/', { token });
+    return response.data;
+}

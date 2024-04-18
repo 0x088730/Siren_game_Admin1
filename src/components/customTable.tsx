@@ -201,22 +201,27 @@ const CustomTable = ({ setPage }: Props) => {
           </div>
           <div>
             <div>
-              <button className='h-10 rounded-full bg-gray-500 my-5 px-3 text-2xl text-white hover:bg-gray-400 duration-500 mx-4'
+              <button className='h-10 rounded-full bg-gray-500 my-5 px-3 text-2xl text-white hover:bg-gray-400 duration-500 mx-2'
+                onClick={() => setPage('bonus')}
+              >
+                Bonus
+              </button>
+              <button className='h-10 rounded-full bg-gray-500 my-5 px-3 text-2xl text-white hover:bg-gray-400 duration-500 mx-2'
                 onClick={() => setPage('deposit')}
               >
                 Deposit
               </button>
-              <button className='h-10 rounded-full bg-gray-500 my-5 px-3 text-2xl text-white hover:bg-gray-400 duration-500 mx-4'
+              <button className='h-10 rounded-full bg-gray-500 my-5 px-3 text-2xl text-white hover:bg-gray-400 duration-500 mx-2'
                 onClick={() => setPage('withdraw')}
               >
                 Withdraw
               </button>
-              <button className='h-10 rounded-full bg-gray-500 my-5 px-3 text-2xl text-white hover:bg-gray-400 duration-500 mx-4'
+              <button className='h-10 rounded-full bg-gray-500 my-5 px-3 text-2xl text-white hover:bg-gray-400 duration-500 mx-2'
                 onClick={() => setPage('logins')}
               >
                 Logins
               </button>
-              <button className='h-10 rounded-full bg-gray-500 my-5 px-3 text-2xl text-white hover:bg-gray-400 duration-500 mx-4'
+              <button className='h-10 rounded-full bg-gray-500 my-5 px-3 text-2xl text-white hover:bg-gray-400 duration-500 mx-2'
                 onClick={() => setPage('battle')}
               >
                 Battle Pass
